@@ -1,0 +1,24 @@
+<div class="form-group">
+  <label class="col-xs-2">Level: </label>
+  <div class="col-xs-10">
+    {{location.level}}
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-xs-2">Name: </label>
+  <div class="col-xs-10">
+    {{location.name}}
+  </div>
+</div>
+<span>Progress:</span>
+<p><ngb-progressbar type="success" [value]="location.currentPosition" [max]="location.locationSize"></ngb-progressbar></p>
+<div *ngIf="location.locationStatus === LocationStatus.Hostile">
+  <span class="text-danger">Hostilities: {{location.hostileHitpoints}}</span>
+</div>
+<div *ngIf="location.availableResources">
+  <span class="text-warning">Available Resources: {{location.availableResources}}</span>
+</div>
+<div *ngIf="location.canTrade">
+  <app-vendor [vendor]="location.vendorModel"></app-vendor>
+</div>
+

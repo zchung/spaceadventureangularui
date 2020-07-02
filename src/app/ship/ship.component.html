@@ -1,0 +1,13 @@
+<div class="form-group">
+  <label class="col-xs-2">Ship Name:</label>
+  <div class="col-xs-10">{{ship.name}}</div>
+</div>
+<span>Ship hitpoints: </span>
+<p><ngb-progressbar type="success" [value]="ship.currentHitpoints" [max]="ship.maximumHitpoints">{{ship.currentHitpoints}} / {{ship.maximumHitpoints}}</ngb-progressbar></p>
+<app-shields [shields]="ship.shields"></app-shields>
+<app-weapon [weapon]="ship.weapon"></app-weapon>
+<app-engines [engines]="ship.engines"></app-engines>
+<span>Power: </span>
+<p><ngb-progressbar type="warning" [value]="ship.powerContainer.currentCapacity" [max]="ship.powerContainer.maximumCapacity">{{ship.powerContainer.currentCapacity}} / {{ship.powerContainer.maximumCapacity}}</ngb-progressbar></p>
+<span>Cargo: </span>
+<p><ngb-progressbar type="secondary" [value]="ship.cargoContainer.currentCapacity" [max]="ship.cargoContainer.maximumCapacity">{{ship.cargoContainer.currentCapacity}} / {{ship.cargoContainer.maximumCapacity}}</ngb-progressbar></p>
