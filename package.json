@@ -7,6 +7,8 @@
     "start:prod": "ng serve --configuration=production",
     "build": "ng build",
     "build:prod": "ng build --configuration=production",
+    "build:github": "ng build --prod --configuration=production --base-href https://zchung.github.io/spaceadventureangularui/",
+    "deploy:github": "angular-cli-ghpages -d dist/space-adventure-ui/ --no-silent",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
