@@ -3,5 +3,5 @@ import { GameModel } from '../game-model';
 
 export interface ExecuteGameTurnRequest {
   TurnAction: TurnAction;
-  GameModel: GameModel;
+  GameModel: GameModel | null;
 }

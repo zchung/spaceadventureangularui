@@ -28,7 +28,7 @@ export class MessageTypeToImagePipe implements PipeTransform {
       default:
         break;
     }
-    return null;
+    return '';
   }
 
 }

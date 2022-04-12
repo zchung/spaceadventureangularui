@@ -9,14 +9,14 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'space-adventure-ui';
 
-  /**
+    /**
    *
    */
-  constructor(private router: Router) {
+    constructor(private router: Router) {
 
-  }
+    }
 
-  public getNewGame(): void {
-    this.router.navigate(['/main-game']);
-  }
+    public getNewGame(): void {
+      this.router.navigate(['/main-game']);
+    }
 }
