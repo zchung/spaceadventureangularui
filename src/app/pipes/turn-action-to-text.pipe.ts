@@ -16,6 +16,7 @@ export class TurnActionToTextPipe implements PipeTransform {
       default:
         break;
     }
+    return '';
   }
 
 }

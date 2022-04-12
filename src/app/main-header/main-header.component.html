@@ -5,12 +5,12 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav me-auto">
 
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="auth-key" placeholder="auth-key" aria-label="auth-key" [(ngModel)]="authKey" name="authKey">
-      <span class="btn btn-outline-success my-2 my-sm-0" (click)="setAuthKey()">Set Key</span>
+    <form class="d-flex">
+        <input class="form-control me-2" type="auth-key" placeholder="auth-key" aria-label="auth-key" [(ngModel)]="authKey" name="authKey">
+        <span class="btn btn-outline-success" (click)="setAuthKey()">Set Key</span>
     </form>
   </div>
 </nav>

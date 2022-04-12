@@ -24,15 +24,14 @@ import { finalize } from 'rxjs/operators';
 })
 export class MainGameComponent implements OnInit {
   public loading = false;
-  public shipName: string;
-  public game: GameModel;
+  public shipName: string = '';
+  public game: GameModel | null = null;
   public availableTurnActions: Array<TurnAction> = new Array<TurnAction>();
   public selectedTurnAction: TurnAction = TurnAction.Travel;
   constructor(private gameService: GameService, private locationStatusModelFactory: LocationStatusModelFactory,
               private modalService: NgbModal) { }
 
   ngOnInit(): void {
-
   }
 
 
@@ -66,14 +65,14 @@ export class MainGameComponent implements OnInit {
 
         } else {
           // put game over logic here.
-          let gameOverMessage: string = null;
-          let endGameResult: EndGameResult = null;
+          let gameOverMessage: string = '';
+          let endGameResult: EndGameResult = new EndGameShipDestroyed();
           if (!gameResponseResult.data.shipStillAlive) {
             endGameResult = new EndGameShipDestroyed();
           } else if (!gameResponseResult.data.stillHasPower) {
             endGameResult = new EndGameNoPower();
           }
-          gameOverMessage = endGameResult.getEndGameText() +
+          gameOverMessage = endGameResult?.getEndGameText() ?? '' +
           ` Turns: ${gameResponseResult.data.gameModel.turnCount} Credits: ${gameResponseResult.data.gameModel.credits}`;
           alert(gameOverMessage);
           this.game = null;
@@ -96,7 +95,7 @@ export class MainGameComponent implements OnInit {
   }
 
   private getAvailableTurnActions(locationStatus: LocationStatus, resourcesAvailable: number): Array<TurnAction> {
-    const locationStatusModel: LocationStatusModel = this.locationStatusModelFactory
+    const locationStatusModel: LocationStatusModel | null = this.locationStatusModelFactory
                                                           .getLocationStatusModelFactory(locationStatus, resourcesAvailable);
     return locationStatusModel.getDropdownOptions();
   }
