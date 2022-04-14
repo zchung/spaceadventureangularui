@@ -1,0 +1,57 @@
+# This is a basic workflow that is manually triggered
+
+name: Angular GitHubCI
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  push:
+    branches:
+    - main #
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - uses: 
+          actions/checkout@v2
+          #
+      - name: Use Node.js $
+        with:
+          node-version:
+            $
+            #
+      
+      - name: Cache node modules
+        id: cache-nodemodules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          # caching node_modules
+          path: node_modules # 👈 path for node_modules folder
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          # 👆 name of the chache key includes package-lock.json
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+            
+      - name: Install Dependencies
+        if:
+          steps.cache-nodemodules.outputs.cache-hit != 'true'
+          # 👆 if cache hits the skip this step.
+        run: npm ci
+        
+      - name: Build
+        run: npm run build:github
+                
+      - name: Deploy
+        run: npm run deploy:github
+        
