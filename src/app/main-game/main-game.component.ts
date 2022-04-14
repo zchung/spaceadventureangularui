@@ -16,6 +16,7 @@ import { EndGameShipDestroyed } from '../models/end-game-ship-destroyed';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { MultiMessagePopupComponent } from '../multi-message-popup/multi-message-popup.component';
 import { finalize } from 'rxjs/operators';
+import { HttpBaseService } from '../services/http-base.service';
 
 @Component({
   selector: 'app-main-game',
@@ -28,14 +29,19 @@ export class MainGameComponent implements OnInit {
   public game: GameModel | null = null;
   public availableTurnActions: Array<TurnAction> = new Array<TurnAction>();
   public selectedTurnAction: TurnAction = TurnAction.Travel;
+  public newGameBtnEnabled: boolean = false;
   constructor(private gameService: GameService, private locationStatusModelFactory: LocationStatusModelFactory,
-              private modalService: NgbModal) { }
+              private modalService: NgbModal, private httpBaseService: HttpBaseService) { }
 
   ngOnInit(): void {
   }
 
 
   public createNewGame(): void {
+    if (!this.httpBaseService.authCode) {
+      alert("Auth code not set");
+      return;
+    }
     this.loading = true;
     this.gameService.getNewGame(this.shipName)
     .pipe(finalize(() => {
@@ -92,6 +98,12 @@ export class MainGameComponent implements OnInit {
         alert(message);
       }
     });
+  }
+
+  public onNewGameEnabled(status: any) : void {
+    if (status === "Healthy") {
+      this.newGameBtnEnabled = true;
+    }
   }
 
   private getAvailableTurnActions(locationStatus: LocationStatus, resourcesAvailable: number): Array<TurnAction> {
