@@ -1,4 +1,4 @@
 export const environment = {
-  gameApiUrl: 'https://spaceadventuregameapi.herokuapp.com/api/game/',
+  gameApiUrlBase: 'https://spaceadventuregameapi.herokuapp.com',
   production: true
 };

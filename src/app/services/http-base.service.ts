@@ -5,7 +5,7 @@ import { retry, catchError } from 'rxjs/operators';
 
 @Injectable()
 export class HttpBaseService {
-  public authCode: string;
+  public authCode: string = "";
   private _baseHeaders: HttpHeaders;
   /**
    *
@@ -40,5 +40,22 @@ export class HttpBaseService {
     const options = { headers: this._baseHeaders };
     Object.assign(options, optionsOverride);
     return this.httpClient.post<T>(url, body, options);
+  }
+
+  public getOverride<T>(url: string, optionsOverride?: {
+    headers?: HttpHeaders | {
+        [header: string]: string | string[];
+    };
+    observe?: 'body';
+    params?: HttpParams | {
+        [param: string]: string | string[];
+    };
+    reportProgress?: boolean;
+    responseType?: 'json' | 'text';
+    withCredentials?: boolean;
+  }): Observable<any> {
+    const options = { headers: this._baseHeaders };
+    Object.assign(options, optionsOverride);
+    return this.httpClient.get<T>(url, options);
   }
 }
