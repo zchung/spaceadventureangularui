@@ -9,7 +9,7 @@
 
     </ul>
     <form class="d-flex">
-        <input class="form-control me-2" type="auth-key" placeholder="auth-key" aria-label="auth-key" [(ngModel)]="authKey" name="authKey">
+        <input class="form-control me-2" type="password" placeholder="auth-key" aria-label="auth-key" [(ngModel)]="authKey" name="authKey">
         <span class="btn btn-outline-success" (click)="setAuthKey()">Set Key</span>
     </form>
     <mat-spinner *ngIf="loading"></mat-spinner>
