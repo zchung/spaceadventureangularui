@@ -9,7 +9,7 @@
     "build:prod": "ng build --configuration=production",
     "build:github": "ng build --configuration=production --base-href https://zchung.github.io/spaceadventureangularui/",
     "deploy:githubLocal": "angular-cli-ghpages -d dist/space-adventure-ui/ --no-silent",
-    "deploy": "ng deploy --base-href https://zchung.github.io/spaceadventureangularui/",
+    "deploy": "ng deploy --base-href=/spaceadventureangularui/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint"
