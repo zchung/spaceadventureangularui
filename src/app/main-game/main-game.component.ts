@@ -63,26 +63,13 @@ export class MainGameComponent implements OnInit {
       if (gameResponseResult.resultType === ResultType.Success) {
         this.game = gameResponseResult.data.gameModel;
         if (gameResponseResult.data.shipStillAlive && gameResponseResult.data.stillHasPower) {
-          this.availableTurnActions = this.getAvailableTurnActions(this.game.locationModel.locationStatus,
-            this.game.locationModel.availableResources);
+          this.availableTurnActions = gameResponseResult.data.availableActions;
           if (!this.availableTurnActions.includes(this.selectedTurnAction)) {
             this.selectedTurnAction = this.availableTurnActions[0];
           }
 
         } else {
-          // put game over logic here.
-          let gameOverMessage: string = '';
-          let endGameResult: EndGameResult = new EndGameShipDestroyed();
-          if (!gameResponseResult.data.shipStillAlive) {
-            endGameResult = new EndGameShipDestroyed();
-          } else if (!gameResponseResult.data.stillHasPower) {
-            endGameResult = new EndGameNoPower();
-          }
-          gameOverMessage = endGameResult?.getEndGameText() ?? '' +
-          ` Turns: ${gameResponseResult.data.gameModel.turnCount} Credits: ${gameResponseResult.data.gameModel.credits}`;
-          alert(gameOverMessage);
           this.game = null;
-          return;
           // high scores go here.
         }
 
