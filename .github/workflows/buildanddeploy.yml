@@ -40,5 +40,7 @@ jobs:
         run: |
           npm run build:github
       - name: Deploy
+        with:
+          github_access_token: ${{ secrets.TOKEN_GITHUB_ACTION }}
         run: |
           npm run deploy

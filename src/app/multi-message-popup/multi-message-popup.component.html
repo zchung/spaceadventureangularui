@@ -5,7 +5,7 @@
   <ngb-carousel>
     <ng-template ngbSlide *ngFor="let message of messages">
       <div class="picsum-img-wrapper">
-        <img [src]="message.messageType | messageTypeToImage" alt="Random first slide">
+        <img [src]="message.messageImageUrl" alt="Random first slide">
       </div>
       <div class="carousel-caption">
         <p>{{ message.messageText }}</p>
