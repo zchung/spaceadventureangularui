@@ -11,7 +11,6 @@ import { LocationComponent } from './location/location.component';
 import { MainGameComponent } from './main-game/main-game.component';
 import { MainHeaderComponent } from './main-header/main-header.component';
 import { MultiMessagePopupComponent } from './multi-message-popup/multi-message-popup.component';
-import { MessageTypeToImagePipe } from './pipes/message-type-to-img.pipe';
 import { TurnActionToTextPipe } from './pipes/turn-action-to-text.pipe';
 import { PowerLevelComponent } from './power-level/power-level.component';
 import { ShieldsComponent } from './shields/shields.component';
@@ -42,7 +41,6 @@ import { MatSliderModule } from '@angular/material/slider';
     TurnActionToTextPipe,
     VendorComponent,
     MultiMessagePopupComponent,
-    MessageTypeToImagePipe,
     MainHeaderComponent
   ],
   imports: [
