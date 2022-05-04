@@ -8,7 +8,7 @@ import { WeaponModel } from '../models/weapon-model';
 })
 export class WeaponComponent implements OnInit {
   @Input() public weapon: WeaponModel;
-  public test: number;
+  @Input() public isDetails: boolean = false;
   constructor() { }
 
   ngOnInit(): void {

@@ -6,9 +6,10 @@ import { GameTurnResponse } from '../models/responses/game-turn-response';
 import { Result } from '../models/result';
 import { environment } from '../../environments/environment';
 import { HttpBaseService } from './http-base.service';
+import { ShipModel } from '../models/ship-model';
 
 @Injectable()
-export class GameService {
+export class GameHttpService {
   /**
    *
    */
@@ -17,9 +18,13 @@ export class GameService {
     this.gameApiUrl = environment.gameApiUrlBase + "/api/game/";
   }
 
-  public getNewGame(shipName: string): Observable<GameModel> {
-    return this.baseHttpService.postOverride<GameModel>(this.gameApiUrl +  'getnewgame',
-      { ShipName : shipName });
+  public executeNewGame(ship: ShipModel): Observable<GameModel> {
+    return this.baseHttpService.postOverride<GameModel>(this.gameApiUrl +  'execute/new',
+      { ShipModel : ship });
+  }
+
+  public getNewRandomShips(countOfShips: number): Observable<Result<Array<ShipModel>>> {
+    return this.baseHttpService.getOverride<Result<Array<ShipModel>>>(this.gameApiUrl + `ship/new/random/${countOfShips}`);
   }
 
   public executeGameTurn(executeGameTurnRequest: ExecuteGameTurnRequest): Observable<Result<GameTurnResponse>> {
