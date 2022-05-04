@@ -8,6 +8,7 @@ import { EnginesModel } from '../models/engines-model';
 })
 export class EnginesComponent implements OnInit {
   @Input() public engines: EnginesModel;
+  @Input() public isDetails: boolean = false;
   constructor() { }
 
   ngOnInit(): void {

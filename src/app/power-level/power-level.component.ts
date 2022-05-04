@@ -7,10 +7,12 @@ import { PoweredEquipment } from '../models/powered-equipment';
   styleUrls: ['./power-level.component.scss']
 })
 export class PowerLevelComponent implements OnInit {
-  @Input() public equipmentName: string;
+  @Input() public equipmentName: string = "";
   @Input() public poweredEquipment: PoweredEquipment;
+  @Input() public effectiveness: number;
   @Input() public min = 0;
   @Input() public max = 5;
+  @Input() public isDetails: boolean = false
 
   constructor() { }
 

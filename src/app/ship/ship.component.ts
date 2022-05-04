@@ -8,6 +8,7 @@ import { ShipModel } from '../models/ship-model';
 })
 export class ShipComponent implements OnInit {
   @Input() public ship: ShipModel;
+  @Input() public isDetails: boolean = false;
   constructor() { }
 
   ngOnInit(): void {

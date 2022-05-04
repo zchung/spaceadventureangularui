@@ -1,22 +1,15 @@
-import { EndGameNoPower } from './../models/end-game-no-power';
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { GameModel } from '../models/game-model';
-import { GameService } from '../services/game-service';
+import { GameHttpService } from '../services/game-http-service';
+import { GameDataService } from '../services/game-data.service';
 import { TurnAction } from '../models/enums/turn-action';
 import { GameTurnResponse } from '../models/responses/game-turn-response';
-import { MessageModel } from '../models/message-model';
 import { Result } from '../models/result';
 import { ResultType } from '../models/enums/result-type';
-import { LocationStatus } from '../models/enums/location-status';
-import { LocationStatusModelFactory } from '../services/location-status-model-factory';
-import { LocationStatusModel } from '../models/interfaces/location-status-model';
-import { EndGameResult } from '../models/interfaces/end-game-result';
-import { EndGameShipDestroyed } from '../models/end-game-ship-destroyed';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { MultiMessagePopupComponent } from '../multi-message-popup/multi-message-popup.component';
 import { finalize } from 'rxjs/operators';
-import { HttpBaseService } from '../services/http-base.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-game',
@@ -29,33 +22,16 @@ export class MainGameComponent implements OnInit {
   public game: GameModel | null = null;
   public availableTurnActions: Array<TurnAction> = new Array<TurnAction>();
   public selectedTurnAction: TurnAction = TurnAction.Travel;
-  public newGameBtnEnabled: boolean = false;
-  constructor(private gameService: GameService, private locationStatusModelFactory: LocationStatusModelFactory,
-              private modalService: NgbModal, private httpBaseService: HttpBaseService) { }
+  constructor(private gameHttpService: GameHttpService, private gameDataService: GameDataService, private modalService: NgbModal,
+      private router: Router) { }
 
   ngOnInit(): void {
+    this.game = this.gameDataService.game;
   }
 
-
-  public createNewGame(): void {
-    if (!this.httpBaseService.authCode) {
-      alert("Auth code not set");
-      return;
-    }
+  public engage(): void {
     this.loading = true;
-    this.gameService.getNewGame(this.shipName)
-    .pipe(finalize(() => {
-      this.loading = false;
-    }))
-    .subscribe((game: GameModel) => {
-        this.game = game;
-        this.loading = false;
-    });
-  }
-
-  public endTurn(): void {
-    this.loading = true;
-    this.gameService.executeGameTurn({ TurnAction: this.selectedTurnAction, GameModel: this.game })
+    this.gameHttpService.executeGameTurn({ TurnAction: this.selectedTurnAction, GameModel: this.game })
     .pipe(finalize(() => {
       this.loading = false;
     }))
@@ -70,6 +46,8 @@ export class MainGameComponent implements OnInit {
 
         } else {
           this.game = null;
+          this.gameDataService.game = null;
+          this.router.navigateByUrl('/new-game');
           // high scores go here.
         }
 
@@ -85,18 +63,6 @@ export class MainGameComponent implements OnInit {
         alert(message);
       }
     });
-  }
-
-  public onNewGameEnabled(status: any) : void {
-    if (status === "Healthy") {
-      this.newGameBtnEnabled = true;
-    }
-  }
-
-  private getAvailableTurnActions(locationStatus: LocationStatus, resourcesAvailable: number): Array<TurnAction> {
-    const locationStatusModel: LocationStatusModel | null = this.locationStatusModelFactory
-                                                          .getLocationStatusModelFactory(locationStatus, resourcesAvailable);
-    return locationStatusModel.getDropdownOptions();
   }
 
 }

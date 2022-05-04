@@ -20,12 +20,14 @@ import { WeaponComponent } from './weapon/weapon.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { HttpErrorInterceptor } from './interceptors/http-error-interceptor';
-import { GameService } from './services/game-service';
+import { GameHttpService } from './services/game-http-service';
 import { HttpBaseService } from './services/http-base.service';
-import { LocationStatusModelFactory } from './services/location-status-model-factory';
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSliderModule } from '@angular/material/slider';
+import { NewRandomShipsComponent } from './new-random-ships/new-random-ships.component';
+import { MiningLaserComponent } from './mining-laser/mining-laser.component';
+import { NewGameComponent } from './new-game/new-game.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,10 @@ import { MatSliderModule } from '@angular/material/slider';
     TurnActionToTextPipe,
     VendorComponent,
     MultiMessagePopupComponent,
-    MainHeaderComponent
+    MainHeaderComponent,
+    NewRandomShipsComponent,
+    MiningLaserComponent,
+    NewGameComponent
   ],
   imports: [
     BrowserModule,
@@ -59,8 +64,7 @@ import { MatSliderModule } from '@angular/material/slider';
     MultiMessagePopupComponent
   ],
   providers: [
-    GameService,
-    LocationStatusModelFactory,
+    GameHttpService,
     HttpBaseService,
     {
       provide: HTTP_INTERCEPTORS,

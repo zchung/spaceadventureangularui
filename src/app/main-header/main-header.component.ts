@@ -1,6 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { HttpBaseService } from '../services/http-base.service';
-import { GameService } from '../services/game-service';
+import { GameHttpService } from '../services/game-http-service';
 import { finalize } from 'rxjs/operators';
 
 @Component({
@@ -10,10 +10,12 @@ import { finalize } from 'rxjs/operators';
 })
 export class MainHeaderComponent implements OnInit {
   public authKey: string = "";
-  public loading: boolean = false
+  public loading: boolean = false;
+  @Input()
+  public showAuthKey = true;
   @Output()
   public onNewGameEnabled : EventEmitter<string> = new EventEmitter<string>();
-  constructor(private httpBaseService: HttpBaseService, private gameService: GameService) { }
+  constructor(private httpBaseService: HttpBaseService, private gameService: GameHttpService) { }
 
   ngOnInit(): void {
   }

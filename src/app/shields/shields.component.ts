@@ -8,6 +8,7 @@ import { ShieldsModel } from '../models/shields-model';
 })
 export class ShieldsComponent implements OnInit {
   @Input() public shields: ShieldsModel;
+  @Input() public isDetails: boolean = false;
   constructor() { }
 
   ngOnInit(): void {

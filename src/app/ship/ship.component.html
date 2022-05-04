@@ -4,9 +4,10 @@
 </div>
 <span>Ship hitpoints: </span>
 <p><ngb-progressbar type="success" [value]="ship.currentHitpoints" [max]="ship.maximumHitpoints">{{ship.currentHitpoints}} / {{ship.maximumHitpoints}}</ngb-progressbar></p>
-<app-shields [shields]="ship.shields"></app-shields>
-<app-weapon [weapon]="ship.weapon"></app-weapon>
-<app-engines [engines]="ship.engines"></app-engines>
+<app-shields [isDetails]="isDetails" [shields]="ship.shields"></app-shields>
+<app-weapon [isDetails]="isDetails" [weapon]="ship.weapon"></app-weapon>
+<app-mining-laser [isDetails]="isDetails" [miningLaser]="ship.miningLaser"></app-mining-laser>
+<app-engines [isDetails]="isDetails" [engines]="ship.engines"></app-engines>
 <span>Power: </span>
 <p><ngb-progressbar type="warning" [value]="ship.powerContainer.currentCapacity" [max]="ship.powerContainer.maximumCapacity">{{ship.powerContainer.currentCapacity}} / {{ship.powerContainer.maximumCapacity}}</ngb-progressbar></p>
 <span>Cargo: </span>

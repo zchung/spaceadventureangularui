@@ -1,2 +1,3 @@
-<p>{{equipmentName}} Power Level: {{poweredEquipment.powerLevel}}</p>
-<mat-slider [min]="min" [max]="max" [(ngModel)]="poweredEquipment.powerLevel"></mat-slider>
+<p>{{equipmentName}} Power Level: {{poweredEquipment.powerLevel}} Effectiveness: {{effectiveness}}</p>
+<p *ngIf="isDetails">Max Power Level {{poweredEquipment.maxPowerSetting}}</p>
+<mat-slider *ngIf="!isDetails" [min]="min" [max]="poweredEquipment.maxPowerSetting" [(ngModel)]="poweredEquipment.powerLevel"></mat-slider>
