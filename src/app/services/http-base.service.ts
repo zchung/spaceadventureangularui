@@ -16,7 +16,7 @@ export class HttpBaseService {
 
   public AddAuthorisationHeader(authCode: string): void {
     this. authCode = authCode;
-    const authHeaderName: string = 'Authorization';
+    const authHeaderName: string = 'ApiKey';
     const authHeader = this._baseHeaders.get(authHeaderName);
     if (!authHeader) {
       this._baseHeaders = this._baseHeaders.append(authHeaderName, authCode);
