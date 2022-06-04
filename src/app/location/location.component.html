@@ -12,11 +12,13 @@
 </div>
 <span>Progress:</span>
 <p><ngb-progressbar type="success" [value]="location.currentPosition" [max]="location.locationSize"></ngb-progressbar></p>
-<div *ngIf="location.locationStatus === LocationStatus.Hostile">
-  <span class="text-danger">Hostilities: {{location.hostileHitpoints}}</span>
+<div *ngIf="location.locationStatus === LocationStatus.Hostile && location.hostility">
+  <span class="text-danger">Hostilities:</span>
+  <p><ngb-progressbar type="danger" [value]="location.hostility.currentHitpoints" [max]="location.hostility.maximumHitpoints"></ngb-progressbar></p>
 </div>
-<div *ngIf="location.availableResources">
-  <span class="text-warning">Available Resources: {{location.availableResources}}</span>
+<div *ngIf="location.mining && location.mining.currentCapacity">
+  <span class="text-warning">Resources to Mine:</span>
+  <p><ngb-progressbar type="warning" [value]="location.mining.currentCapacity" [max]="location.mining.maximumCapacity"></ngb-progressbar></p>
 </div>
 <div *ngIf="location.canTrade">
   <app-vendor [vendor]="location.vendorModel"></app-vendor>
