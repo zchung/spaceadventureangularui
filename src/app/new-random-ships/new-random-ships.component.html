@@ -1,6 +1,5 @@
-<app-main-header [showAuthKey]="false"></app-main-header>
 <div class="card">
-  <div *ngIf="ships.length > 0" class="card-body">
+  <div *ngIf="ships && ships.length > 0" class="card-body">
     <h1>Select a ship</h1>
     <div *ngFor="let ship of ships">
       <app-ship [isDetails]="true" [ship]="ship"></app-ship>

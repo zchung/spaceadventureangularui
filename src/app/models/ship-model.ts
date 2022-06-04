@@ -6,6 +6,7 @@ import { ContainerModel } from './container-model';
 import { MiningLaserModel } from './mining-laser-model';
 
 export interface ShipModel extends Damageable {
+  id: string
   name: string;
   shields: ShieldsModel;
   weapon: WeaponModel;
