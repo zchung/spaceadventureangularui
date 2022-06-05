@@ -6,16 +6,21 @@ import { retry, catchError } from 'rxjs/operators';
 @Injectable()
 export class HttpBaseService {
   public authCode: string = "";
+  public static apiKeyName: string = "spaceadventure_apikey";
   private _baseHeaders: HttpHeaders;
   /**
    *
    */
   constructor(private httpClient: HttpClient) {
     this._baseHeaders = new HttpHeaders();
+    let apiKey = window.localStorage.getItem(HttpBaseService.apiKeyName);
+    if (apiKey) {
+      this.AddAuthorisationHeader(apiKey);
+    }
   }
 
   public AddAuthorisationHeader(authCode: string): void {
-    this. authCode = authCode;
+    this.authCode = authCode;
     const authHeaderName: string = 'ApiKey';
     const authHeader = this._baseHeaders.get(authHeaderName);
     if (!authHeader) {

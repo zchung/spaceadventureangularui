@@ -28,8 +28,8 @@ export class GameHttpService {
     return this.baseHttpService.postOverride<Result<GameTurnResponse>>(this.gameApiUrl + 'execute/turn', executeGameTurnRequest);
   }
 
-  public getGame(gameId: string): Observable<Result<GameModel>> {
-    return this.baseHttpService.getOverride<Result<GameModel>>(this.gameApiUrl + `${gameId}`);
+  public getGame(gameId: string): Observable<Result<GameTurnResponse>> {
+    return this.baseHttpService.getOverride<Result<GameTurnResponse>>(this.gameApiUrl + `${gameId}`);
   }
 
   public getHealthCheck() : Observable<any> {

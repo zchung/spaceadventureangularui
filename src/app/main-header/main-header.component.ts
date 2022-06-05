@@ -15,20 +15,28 @@ export class MainHeaderComponent implements OnInit {
   public showAuthKey = true;
   @Output()
   public onNewGameEnabled : EventEmitter<string> = new EventEmitter<string>();
+
   constructor(private httpBaseService: HttpBaseService, private gameService: GameHttpService) { }
 
   ngOnInit(): void {
+
   }
 
   public setAuthKey(): void {
-    this.httpBaseService.AddAuthorisationHeader(this.authKey);
-    this.loading = true;
-    this.gameService.getHealthCheck()
-    .pipe(finalize(() => {
-      this.loading = false;
-    }))
-    .subscribe((result: any) => {
-        this.onNewGameEnabled.emit(result);
-    })
+    if (this.authKey) {
+      window.localStorage.setItem(HttpBaseService.apiKeyName, this.authKey);
+      this.httpBaseService.AddAuthorisationHeader(this.authKey);
+      this.loading = true;
+      this.gameService.getHealthCheck()
+      .pipe(finalize(() => {
+        this.loading = false;
+      }))
+      .subscribe((result: any) => {
+          this.onNewGameEnabled.emit(result);
+      })
+    } else {
+      alert("no key")
+    }
+
   }
 }

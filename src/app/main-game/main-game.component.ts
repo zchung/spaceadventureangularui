@@ -37,12 +37,8 @@ export class MainGameComponent implements OnInit {
         this.gameHttpService.getGame(gameId)
         .pipe(finalize(() => {
           this.loading = false;
-        })).subscribe((gameResult: Result<GameModel>) => {
-          if (gameResult.resultType == ResultType.Success) {
-            this.game = gameResult.data;
-          } else {
-            alert(JSON.stringify(gameResult.messages));
-          }
+        })).subscribe((gameResponseResult: Result<GameTurnResponse>) => {
+          this.HandlePostTurnActions(gameResponseResult);
         })
       } else {
         alert("empty game Id");
@@ -58,33 +54,38 @@ export class MainGameComponent implements OnInit {
       this.loading = false;
     }))
     .subscribe((gameResponseResult: Result<GameTurnResponse>) => {
-      if (gameResponseResult.resultType === ResultType.Success) {
-        this.game = gameResponseResult.data.gameModel;
-        if (gameResponseResult.data.shipStillAlive && gameResponseResult.data.stillHasPower) {
-          this.availableTurnActions = gameResponseResult.data.availableActions;
-          if (!this.availableTurnActions.includes(this.selectedTurnAction)) {
-            this.selectedTurnAction = this.availableTurnActions[0];
-          }
+      this.HandlePostTurnActions(gameResponseResult);
+    });
+  }
 
-        } else {
-          this.game = null;
-          this.gameDataService.game = null;
-          this.router.navigateByUrl('/new-game');
-          // high scores go here.
+  private HandlePostTurnActions(gameResponseResult: Result<GameTurnResponse>): void {
+    if (gameResponseResult.resultType === ResultType.Success) {
+      this.game = gameResponseResult.data.gameModel;
+      if (gameResponseResult.data.shipStillAlive && gameResponseResult.data.stillHasPower) {
+        this.availableTurnActions = gameResponseResult.data.availableActions;
+        if (!this.availableTurnActions.includes(this.selectedTurnAction)) {
+          this.selectedTurnAction = this.availableTurnActions[0];
         }
 
+      } else {
+        this.game = null;
+        this.gameDataService.game = null;
+        this.router.navigateByUrl('/new-game');
+        // high scores go here.
+      }
+      if (gameResponseResult.data.messages && gameResponseResult.data.messages.length) {
         const modal: NgbModalRef = this.modalService.open(MultiMessagePopupComponent);
         const multiMessagePopupComponent: MultiMessagePopupComponent =  modal.componentInstance;
         multiMessagePopupComponent.messages = gameResponseResult.data.messages;
-
-      } else {
-        let message = '';
-        gameResponseResult.messages.forEach((messageText: string) => {
-          message += `${messageText}`;
-        });
-        alert(message);
       }
-    });
+
+    } else {
+      let message = '';
+      gameResponseResult.messages.forEach((messageText: string) => {
+        message += `${messageText}`;
+      });
+      alert(message);
+    }
   }
 
   private GetShipSettings(): Array<ShipSettingsValue> {
