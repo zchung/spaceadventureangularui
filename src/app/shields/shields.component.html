@@ -1,3 +1,3 @@
 <span>Shields: </span>
 <p><ngb-progressbar type="info" [value]="shields.currentHitpoints" [max]="shields.maximumHitpoints">{{shields.currentHitpoints}} / {{shields.maximumHitpoints}}</ngb-progressbar></p>
-<app-power-level [poweredEquipment]="shields" [equipmentName]="'Shields'" [isDetails]="isDetails"></app-power-level>
+<app-power-level [poweredEquipment]="shields" [equipmentName]="'Shields'" [isDetails]="isDetails" [effectiveness]="shields.regenAmount"></app-power-level>
