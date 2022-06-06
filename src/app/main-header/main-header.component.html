@@ -1,17 +1,15 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Space Adventure</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Space Adventure</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav me-auto">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto">
 
-    </ul>
-    <form class="d-flex" *ngIf="showAuthKey">
-        <input class="form-control me-2" type="password" placeholder="auth-key" aria-label="auth-key" [(ngModel)]="authKey" name="authKey">
-        <span class="btn btn-outline-success" (click)="setAuthKey()">Set Key</span>
-    </form>
-    <mat-spinner *ngIf="loading"></mat-spinner>
+      </ul>
+
+    </div>
   </div>
 </nav>

@@ -1,4 +1,4 @@
-<app-main-header (onNewGameEnabled)="onNewGameEnabled($event)" [showAuthKey]="true"></app-main-header>
+<app-main-header></app-main-header>
 <div class="card">
   <div class="card-body">
     <div>
@@ -11,3 +11,10 @@
     </div>
   </div>
 </div>
+<footer class="footer mt-auto py-3 bg-light">
+  <form class="form-group">
+    <input class="form-control me-2" type="password" placeholder="auth-key" aria-label="auth-key" [(ngModel)]="authKey" name="authKey">
+    <span class="btn btn-outline-success" (click)="setAuthKey()">Set Key</span>
+  </form>
+  <mat-spinner *ngIf="loading"></mat-spinner>
+</footer>
