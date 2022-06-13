@@ -1,4 +1,4 @@
 <app-main-header></app-main-header>
 <p>Game Options</p>
-<app-new-random-ships [ships]="gameOptions.ships" [gameOptionsId]="gameOptions.id"></app-new-random-ships>
+<app-new-random-ships *ngIf="gameOptions" [ships]="gameOptions.ships" [gameOptionsId]="gameOptions.id"></app-new-random-ships>
 <mat-spinner *ngIf="loading"></mat-spinner>
