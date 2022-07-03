@@ -24,14 +24,36 @@
       </ul>
 
       <div [ngbNavOutlet]="nav" class="mt-2"></div>
-
+      <hr />
       <div class="mb-3">
-        <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="selectedTurnAction">
-          <label ngbButtonLabel class="btn-primary" *ngFor="let action of availableTurnActions">
-            <input ngbButton type="radio" [value]="action"> {{action | turnActionToText}}
-          </label>
+        <div class="row">
+          <div class="col">
+            <h2>Turn Actions</h2>
+            <mat-radio-group aria-label="Select an action" [(ngModel)]="selectedTurnAction">
+              <mat-radio-button
+                *ngFor="let action of availableTurnActions"
+                [value]="action"
+                (change)="onTurnSelected($event)">
+                {{action | turnActionToText}}
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
         </div>
-        <span class="btn btn-sm btn-outline-primary ml-2" (click)="engage()">Engage</span>
+        <div class="row">
+          <div *ngIf="showTradeActions && availableTradeActions">
+            <h2>Trade Actions</h2>
+            <mat-radio-group aria-label="Select a trade action" [(ngModel)]="selectedTradeAction">
+              <mat-radio-button
+                *ngFor="let action of availableTradeActions"
+                [value]="action">
+                {{action | tradeActionToText}}
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="row">
+          <span class="btn btn-sm btn-outline-primary ml-2" (click)="engage()">Engage</span>
+        </div>
       </div>
     </div>
     <mat-spinner *ngIf="loading"></mat-spinner>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { GameModel } from '../models/game-model';
 import { GameHttpService } from '../services/game-http-service';
 import { GameDataService } from '../services/game-data.service';
@@ -13,6 +13,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ExecuteGameTurnRequest } from '../models/requests/execute-game-turn';
 import { ShipSettingsValue } from '../models/requests/ship-settings-value';
 import { ShipItem } from '../models/enums/ship-item';
+import { MatRadioChange } from '@angular/material/radio';
+import { TradeAction } from '../models/enums/trade-action';
+import { MatButtonToggleChange } from '@angular/material/button-toggle';
 
 @Component({
   selector: 'app-main-game',
@@ -25,6 +28,10 @@ export class MainGameComponent implements OnInit {
   public game: GameModel | null = null;
   public availableTurnActions: Array<TurnAction> = new Array<TurnAction>();
   public selectedTurnAction: TurnAction = TurnAction.Travel;
+  public showTradeActions: boolean = false;
+  public availableTradeActions: Array<TradeAction> = new Array<TradeAction>();
+  public selectedTradeAction: TradeAction = TradeAction.ResourcesForCredits; // default value
+
   constructor(private gameHttpService: GameHttpService, private gameDataService: GameDataService, private modalService: NgbModal,
       private router: Router, private activatedRoute: ActivatedRoute) { }
 
@@ -46,10 +53,22 @@ export class MainGameComponent implements OnInit {
     }
   }
 
+  public onTurnSelected(event: MatRadioChange): void {
+    if (event.value === TurnAction.Trade) {
+      this.showTradeActions = true;
+    } else {
+      this.showTradeActions = false;
+    }
+  }
+
   public engage(): void {
     this.loading = true;
     var shipSetting = this.GetShipSettings();
-    this.gameHttpService.executeGameTurn({ GameId: this.game?.id ?? "", TurnAction: this.selectedTurnAction, ShipSettings: shipSetting })
+    this.gameHttpService.executeGameTurn({
+      GameId: this.game?.id ?? "",
+      TurnAction: this.selectedTurnAction,
+      TradeAction: this.selectedTradeAction,
+      ShipSettings: shipSetting })
     .pipe(finalize(() => {
       this.loading = false;
     }))
@@ -65,6 +84,10 @@ export class MainGameComponent implements OnInit {
         this.availableTurnActions = gameResponseResult.data.availableActions;
         if (!this.availableTurnActions.includes(this.selectedTurnAction)) {
           this.selectedTurnAction = this.availableTurnActions[0];
+        }
+        this.availableTradeActions = gameResponseResult.data.tradeActions;
+        if (!this.availableTradeActions.includes(this.selectedTradeAction)) {
+          this.selectedTradeAction = this.availableTradeActions[0];
         }
 
       } else {

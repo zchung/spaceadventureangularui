@@ -18,18 +18,21 @@ import { ShipComponent } from './ship/ship.component';
 import { VendorComponent } from './vendor/vendor.component';
 import { WeaponComponent } from './weapon/weapon.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpErrorInterceptor } from './interceptors/http-error-interceptor';
 import { GameHttpService } from './services/game-http-service';
 import { HttpBaseService } from './services/http-base.service';
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatRadioModule } from '@angular/material/radio';
 import { NewRandomShipsComponent } from './new-random-ships/new-random-ships.component';
 import { MiningLaserComponent } from './mining-laser/mining-laser.component';
 import { NewGameComponent } from './new-game/new-game.component';
 import { GameOptionsComponent } from './game-options/game-options.component';
 import { GameOptionsHttpService } from './services/game-options-http-service';
+import { TradeActionToTextPipe } from './pipes/trade-action-to-text.pipe';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,8 @@ import { GameOptionsHttpService } from './services/game-options-http-service';
     NewRandomShipsComponent,
     MiningLaserComponent,
     NewGameComponent,
-    GameOptionsComponent
+    GameOptionsComponent,
+    TradeActionToTextPipe
   ],
   imports: [
     BrowserModule,
@@ -58,10 +62,13 @@ import { GameOptionsHttpService } from './services/game-options-http-service';
     NgbModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     NgbModalModule,
     NgbNavModule,
     MatProgressSpinnerModule,
-    MatSliderModule
+    MatSliderModule,
+    MatRadioModule,
+    MatButtonToggleModule
   ],
   entryComponents: [
     MultiMessagePopupComponent
