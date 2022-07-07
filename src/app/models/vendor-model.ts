@@ -3,4 +3,6 @@ export interface VendorModel {
   powerRechargeRate: number;
   resourcesToTrade: number;
   powerToTrade: number;
+  repairsToTrade: number;
+  repairRate: number;
 }
