@@ -14,4 +14,5 @@ export interface ShipModel extends Damageable {
   engines: EnginesModel;
   powerContainer: ContainerModel;
   cargoContainer: ContainerModel;
+  cost: number;
 }
