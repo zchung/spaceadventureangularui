@@ -10,4 +10,5 @@ export interface GameTurnResponse {
   messages: Array<MessageModel>;
   availableActions: Array<TurnAction>;
   tradeActions: Array<TradeAction>;
+  newHighScorePosition?: number;
 }
