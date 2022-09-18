@@ -93,7 +93,11 @@ export class MainGameComponent implements OnInit {
       } else {
         this.game = null;
         this.gameDataService.game = null;
-        this.router.navigateByUrl('/new-game');
+        if (gameResponseResult.data.newHighScorePosition !== null) {
+          this.router.navigateByUrl(`/game-high-scores/${gameResponseResult.data.newHighScorePosition}`);
+        } else {
+          this.router.navigateByUrl('/new-game');
+        }
         // high scores go here.
       }
       if (gameResponseResult.data.messages && gameResponseResult.data.messages.length) {

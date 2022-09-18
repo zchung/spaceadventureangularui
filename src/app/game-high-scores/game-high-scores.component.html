@@ -1,0 +1,25 @@
+<app-main-header></app-main-header>
+<h1>High Scores</h1>
+<table class="table" *ngIf="highScoreList">
+  <thead>
+    <tr>
+      <th scope="col">
+        Turn Count
+      </th>
+      <th scope="col">
+        Date Created
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let score of highScoreList; let i = index" scope="row" [ngClass]="{ 'table-success': newHighScoreIndex == i}">
+      <td>
+        {{score.turnCount}}
+      </td>
+      <td>
+        {{score.dateCreated | date:'fullDate'}}
+      </td>
+    </tr>
+  </tbody>
+</table>
+<mat-spinner *ngIf="loading"></mat-spinner>

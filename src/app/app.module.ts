@@ -33,6 +33,7 @@ import { GameOptionsComponent } from './game-options/game-options.component';
 import { GameOptionsHttpService } from './services/game-options-http-service';
 import { TradeActionToTextPipe } from './pipes/trade-action-to-text.pipe';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { GameHighScoresComponent } from './game-high-scores/game-high-scores.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     MiningLaserComponent,
     NewGameComponent,
     GameOptionsComponent,
-    TradeActionToTextPipe
+    TradeActionToTextPipe,
+    GameHighScoresComponent
   ],
   imports: [
     BrowserModule,
