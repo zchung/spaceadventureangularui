@@ -1,3 +1,4 @@
+import { ShipEquipmentList } from './ship-equipment-list-model';
 export interface VendorModel {
   resourcesTradeRate: number;
   powerRechargeRate: number;
@@ -5,4 +6,5 @@ export interface VendorModel {
   powerToTrade: number;
   repairsToTrade: number;
   repairRate: number;
+  shipEquipment: ShipEquipmentList;
 }
