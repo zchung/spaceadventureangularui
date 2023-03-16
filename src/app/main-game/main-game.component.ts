@@ -13,9 +13,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ExecuteGameTurnRequest } from '../models/requests/execute-game-turn';
 import { ShipSettingsValue } from '../models/requests/ship-settings-value';
 import { ShipItem } from '../models/enums/ship-item';
-import { MatRadioChange } from '@angular/material/radio';
 import { TradeAction } from '../models/enums/trade-action';
-import { MatButtonToggleChange } from '@angular/material/button-toggle';
+import { EquipmentSelected } from '../models/requests/equipment-selected';
 
 @Component({
   selector: 'app-main-game',
@@ -31,6 +30,8 @@ export class MainGameComponent implements OnInit {
   public showTradeActions: boolean = false;
   public availableTradeActions: Array<TradeAction> = new Array<TradeAction>();
   public selectedTradeAction: TradeAction = TradeAction.ResourcesForCredits; // default value
+
+  private selectedEquipment : EquipmentSelected | null = null;
 
   constructor(private gameHttpService: GameHttpService, private gameDataService: GameDataService, private modalService: NgbModal,
       private router: Router, private activatedRoute: ActivatedRoute) { }
@@ -53,12 +54,8 @@ export class MainGameComponent implements OnInit {
     }
   }
 
-  public onTurnSelected(event: MatRadioChange): void {
-    if (event.value === TurnAction.Trade) {
-      this.showTradeActions = true;
-    } else {
-      this.showTradeActions = false;
-    }
+  public onTurnSelected(turnAction: TurnAction): void {
+    this.selectedTurnAction = turnAction;
   }
 
   public engage(): void {
@@ -68,7 +65,9 @@ export class MainGameComponent implements OnInit {
       GameId: this.game?.id ?? "",
       TurnAction: this.selectedTurnAction,
       TradeAction: this.selectedTradeAction,
-      ShipSettings: shipSetting })
+      ShipSettings: shipSetting,
+      SelectedEquipment: this.selectedEquipment
+        })
     .pipe(finalize(() => {
       this.loading = false;
     }))
@@ -122,6 +121,14 @@ export class MainGameComponent implements OnInit {
       new ShipSettingsValue(this.game?.shipModel.miningLaser.powerLevel ?? 0, ShipItem.MiningLaser),
       new ShipSettingsValue(this.game?.shipModel.engines.powerLevel ?? 0, ShipItem.Engines)
     ]
+  }
+
+  public onTradeActionChanged(tradeAction: TradeAction) {
+    this.selectedTradeAction = tradeAction;
+  }
+
+  public onSelectedEquipment(selectedEquipmentEvent: EquipmentSelected) {
+    this.selectedEquipment = selectedEquipmentEvent;
   }
 
 }

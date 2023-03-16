@@ -1,0 +1,22 @@
+<ul ngbNav #nav="ngbNav" class="nav-tabs">
+  <li [ngbNavItem]="1">
+    <a ngbNavLink>Game Info</a>
+    <ng-template ngbNavContent>
+      <app-game [game]="game"></app-game>
+    </ng-template>
+  </li>
+  <li [ngbNavItem]="2">
+    <a ngbNavLink>Ship</a>
+    <ng-template ngbNavContent>
+      <app-ship [ship]="game.shipModel"></app-ship>
+    </ng-template>
+  </li>
+  <li [ngbNavItem]="3">
+    <a ngbNavLink>Location</a>
+    <ng-template ngbNavContent>
+      <app-location [location]="game.locationModel"></app-location>
+    </ng-template>
+  </li>
+</ul>
+
+<div [ngbNavOutlet]="nav" class="mt-2"></div>

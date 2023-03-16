@@ -1,3 +1,4 @@
-<p>{{equipmentName}} Power Level: {{poweredEquipment.powerLevel}} Effectiveness: {{effectiveness}}</p>
+<p><span *ngIf="!isDetails">{{equipmentName}} Power Level: {{poweredEquipment.powerLevel}}</span><span> Effectiveness: {{effectiveness}}</span></p>
 <p *ngIf="isDetails">Max Power Level {{poweredEquipment.maxPowerSetting}}</p>
+<p *ngIf="isDetails">Cost: {{poweredEquipment.cost}}</p>
 <mat-slider *ngIf="!isDetails" [min]="min" [max]="poweredEquipment.maxPowerSetting" [(ngModel)]="poweredEquipment.powerLevel"></mat-slider>

@@ -1,0 +1,58 @@
+<div *ngIf="shipEquipment">
+  <hr />
+  <h1>Ship Equipment</h1>
+  <h2>Credits: {{credits}}</h2>
+  <div *ngIf="selectedShield">
+    <p>Shield Selected: {{selectedShield.id}}</p>
+  </div>
+  <div *ngIf="selectedWeapon">
+    <p>Weapon Selected: {{selectedWeapon.id}}</p>
+  </div>
+  <div *ngIf="selectedMiningLaser">
+    <p>Mining Laser Selected: {{selectedMiningLaser.id}}</p>
+  </div>
+  <div *ngIf="selectedEngine">
+    <p>Engines Selected: {{selectedEngine.id}}</p>
+  </div>
+  <ul ngbNav #shipEquipmentNav="ngbNav" class="nav-tabs">
+    <li [ngbNavItem]="1">
+      <a ngbNavLink>Shields ({{shipEquipment.shields.length}})</a>
+      <ng-template ngbNavContent>
+        <div class="row" *ngFor="let shield of shipEquipment.shields">
+          <app-shields [shields]="shield" [isDetails]="true"></app-shields>
+          <span class="btn btn-sm btn-outline-primary ml-2" (click)="onShieldSelected(shield)">Buy Shield</span>
+        </div>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="2">
+      <a ngbNavLink>Weapons ({{shipEquipment.weapons.length}})</a>
+      <ng-template ngbNavContent>
+        <div class="row" *ngFor="let weapon of shipEquipment.weapons">
+          <app-weapon [weapon]="weapon" [isDetails]="true"></app-weapon>
+          <span class="btn btn-sm btn-outline-primary ml-2" (click)="onWeaponSelected(weapon)">Buy Weapon</span>
+        </div>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="3">
+      <a ngbNavLink>Engines ({{shipEquipment.engines.length}})</a>
+      <ng-template ngbNavContent>
+        <div class="row" *ngFor="let engine of shipEquipment.engines">
+          <app-engines [engines]="engine" [isDetails]="true"></app-engines>
+          <span class="btn btn-sm btn-outline-primary ml-2" (click)="onEngineSelected(engine)">Buy Engines</span>
+        </div>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="4">
+      <a ngbNavLink>Mining Lasers ({{shipEquipment.miningLasers.length}})</a>
+      <ng-template ngbNavContent>
+        <div class="row" *ngFor="let miningLaser of shipEquipment.miningLasers">
+          <app-mining-laser [miningLaser]="miningLaser" [isDetails]="true"></app-mining-laser>
+          <span class="btn btn-sm btn-outline-primary ml-2" (click)="onMiningLaserSelected(miningLaser)">Buy Mining Laser</span>
+        </div>
+      </ng-template>
+    </li>
+  </ul>
+
+  <div [ngbNavOutlet]="shipEquipmentNav" class="mt-2"></div>
+  <hr />
+</div>

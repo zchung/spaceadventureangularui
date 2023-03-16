@@ -34,6 +34,9 @@ import { GameOptionsHttpService } from './services/game-options-http-service';
 import { TradeActionToTextPipe } from './pipes/trade-action-to-text.pipe';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { GameHighScoresComponent } from './game-high-scores/game-high-scores.component';
+import { MainGameTabsComponent } from './main-game-tabs/main-game-tabs.component';
+import { MainGameTurnActionsComponent } from './main-game-turn-actions/main-game-turn-actions.component';
+import { MainGameVendorShipEquipmentListComponent } from './main-game-vendor-ship-equipment-list/main-game-vendor-ship-equipment-list.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +58,10 @@ import { GameHighScoresComponent } from './game-high-scores/game-high-scores.com
     NewGameComponent,
     GameOptionsComponent,
     TradeActionToTextPipe,
-    GameHighScoresComponent
+    GameHighScoresComponent,
+    MainGameTabsComponent,
+    MainGameTurnActionsComponent,
+    MainGameVendorShipEquipmentListComponent
   ],
   imports: [
     BrowserModule,

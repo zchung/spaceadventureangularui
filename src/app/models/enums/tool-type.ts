@@ -1,3 +1,6 @@
 export enum ToolType {
-  Mining
+  Mining,
+  Shields,
+  Engines,
+  Weapons
 }

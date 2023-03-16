@@ -2,55 +2,20 @@
 <div class="card">
   <div class="card-body">
     <div *ngIf="game">
-      <ul ngbNav #nav="ngbNav" class="nav-tabs">
-        <li [ngbNavItem]="1">
-          <a ngbNavLink>Game Info</a>
-          <ng-template ngbNavContent>
-            <app-game [game]="game"></app-game>
-          </ng-template>
-        </li>
-        <li [ngbNavItem]="2">
-          <a ngbNavLink>Ship</a>
-          <ng-template ngbNavContent>
-            <app-ship [ship]="game.shipModel"></app-ship>
-          </ng-template>
-        </li>
-        <li [ngbNavItem]="3">
-          <a ngbNavLink>Location</a>
-          <ng-template ngbNavContent>
-            <app-location [location]="game.locationModel"></app-location>
-          </ng-template>
-        </li>
-      </ul>
-
-      <div [ngbNavOutlet]="nav" class="mt-2"></div>
+      <app-main-game-tabs [game]="game"></app-main-game-tabs>
       <hr />
       <div class="mb-3">
-        <div class="row">
-          <div class="col">
-            <h2>Turn Actions</h2>
-            <mat-radio-group aria-label="Select an action" [(ngModel)]="selectedTurnAction">
-              <mat-radio-button
-                *ngFor="let action of availableTurnActions"
-                [value]="action"
-                (change)="onTurnSelected($event)">
-                {{action | turnActionToText}}
-              </mat-radio-button>
-            </mat-radio-group>
-          </div>
-        </div>
-        <div class="row">
-          <div *ngIf="showTradeActions && availableTradeActions">
-            <h2>Trade Actions</h2>
-            <mat-radio-group aria-label="Select a trade action" [(ngModel)]="selectedTradeAction">
-              <mat-radio-button
-                *ngFor="let action of availableTradeActions"
-                [value]="action">
-                {{action | tradeActionToText}}
-              </mat-radio-button>
-            </mat-radio-group>
-          </div>
-        </div>
+       <app-main-game-turn-actions
+        [availableTurnActions]="availableTurnActions"
+        [availableTradeActions]="availableTradeActions"
+        [selectedTurnAction]="selectedTurnAction"
+        [selectedTradeAction]="selectedTradeAction"
+        [shipEquipment]="game.locationModel.vendorModel.shipEquipment"
+        [credits]="game.credits"
+        (onTurnSelectedEvent)="onTurnSelected($event)"
+        (onTradeActionChangedEvent)="onTradeActionChanged($event)"
+        (onSelectedEquipmentEvent)="onSelectedEquipment($event)">
+      </app-main-game-turn-actions>
         <div class="row">
           <span class="btn btn-sm btn-outline-primary ml-2" (click)="engage()">Engage</span>
         </div>
