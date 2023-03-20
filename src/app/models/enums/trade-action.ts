@@ -3,5 +3,6 @@ export enum TradeAction {
   ResourcesForPower,
   ResourcesForShipHitpoints,
   CreditsForPower,
-  CreditsForShipHitpoints
+  CreditsForShipHitpoints,
+  Shop
 }

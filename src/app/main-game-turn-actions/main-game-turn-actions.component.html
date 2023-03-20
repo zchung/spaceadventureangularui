@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col">
+    <h2>Turn Actions</h2>
+    <mat-radio-group aria-label="Select an action" [(ngModel)]="selectedTurnAction">
+      <mat-radio-button
+        *ngFor="let action of availableTurnActions"
+        [value]="action"
+        (change)="onTurnSelected($event)">
+        {{action | turnActionToText}}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+</div>
+<div class="row">
+  <div *ngIf="showTradeActions && availableTradeActions">
+    <h2>Trade Actions</h2>
+    <mat-radio-group aria-label="Select a trade action" [(ngModel)]="selectedTradeAction" (ngModelChange)="onTradeActionChanged($event)">
+      <mat-radio-button
+        *ngFor="let action of availableTradeActions"
+        [value]="action">
+        {{action | tradeActionToText}}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <div class="row" *ngIf="showVendorShop">
+    <app-main-game-vendor-ship-equipment-list
+      [shipEquipment]="shipEquipment"
+      [credits]="credits"
+      (selectedEquipmentEvent)="onSelectedEquipment($event)"
+    ></app-main-game-vendor-ship-equipment-list>
+  </div>
+</div>
