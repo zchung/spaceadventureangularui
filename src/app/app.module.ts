@@ -23,9 +23,9 @@ import { HttpErrorInterceptor } from './interceptors/http-error-interceptor';
 import { GameHttpService } from './services/game-http-service';
 import { HttpBaseService } from './services/http-base.service';
 
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSliderModule } from '@angular/material/slider';
-import { MatRadioModule } from '@angular/material/radio';
+import { MatLegacyProgressSpinnerModule as MatProgressSpinnerModule } from '@angular/material/legacy-progress-spinner';
+import { MatLegacySliderModule as MatSliderModule } from '@angular/material/legacy-slider';
+import { MatLegacyRadioModule as MatRadioModule } from '@angular/material/legacy-radio';
 import { NewRandomShipsComponent } from './new-random-ships/new-random-ships.component';
 import { MiningLaserComponent } from './mining-laser/mining-laser.component';
 import { NewGameComponent } from './new-game/new-game.component';
