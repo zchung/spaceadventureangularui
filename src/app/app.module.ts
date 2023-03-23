@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgbModalModule, NgbModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCarouselModule, NgbModalModule, NgbNavModule, NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EnginesComponent } from './engines/engines.component';
 import { GameComponent } from './game/game.component';
@@ -23,9 +23,6 @@ import { HttpErrorInterceptor } from './interceptors/http-error-interceptor';
 import { GameHttpService } from './services/game-http-service';
 import { HttpBaseService } from './services/http-base.service';
 
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSliderModule } from '@angular/material/slider';
-import { MatRadioModule } from '@angular/material/radio';
 import { NewRandomShipsComponent } from './new-random-ships/new-random-ships.component';
 import { MiningLaserComponent } from './mining-laser/mining-laser.component';
 import { NewGameComponent } from './new-game/new-game.component';
@@ -37,6 +34,9 @@ import { GameHighScoresComponent } from './game-high-scores/game-high-scores.com
 import { MainGameTabsComponent } from './main-game-tabs/main-game-tabs.component';
 import { MainGameTurnActionsComponent } from './main-game-turn-actions/main-game-turn-actions.component';
 import { MainGameVendorShipEquipmentListComponent } from './main-game-vendor-ship-equipment-list/main-game-vendor-ship-equipment-list.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatRadioModule, MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -67,10 +67,11 @@ import { MainGameVendorShipEquipmentListComponent } from './main-game-vendor-shi
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgbModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    NgbCarouselModule,
+    NgbProgressbarModule,
     NgbModalModule,
     NgbNavModule,
     MatProgressSpinnerModule,

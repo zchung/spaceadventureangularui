@@ -1,0 +1,17 @@
+::ng-deep.mat-mdc-radio-button .mdc-form-field {
+  color: black;
+}
+::ng-deep.mat-mdc-radio-button.mat-accent {
+  --mdc-radio-disabled-selected-icon-color: blue;
+  --mdc-radio-disabled-unselected-icon-color: blue;
+  --mdc-radio-unselected-focus-icon-color: blue;
+  --mdc-radio-unselected-hover-icon-color: blue;
+  --mdc-radio-unselected-icon-color: blue;
+  --mdc-radio-unselected-pressed-icon-color: blue;
+  --mdc-radio-selected-focus-icon-color: blue;
+  --mdc-radio-selected-hover-icon-color: blue;
+  --mdc-radio-selected-icon-color: blue;
+  --mdc-radio-selected-pressed-icon-color: blue;
+  --mat-mdc-radio-ripple-color: blue;
+  --mat-mdc-radio-checked-ripple-color: blue;
+}
