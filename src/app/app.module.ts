@@ -79,9 +79,6 @@ import { MatRadioModule, MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/rad
     MatRadioModule,
     MatButtonToggleModule
   ],
-  entryComponents: [
-    MultiMessagePopupComponent
-  ],
   providers: [
     GameHttpService,
     GameOptionsHttpService,
