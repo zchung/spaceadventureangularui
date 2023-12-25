@@ -73,10 +73,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "space-adventure-ui:build:production"
+              "buildTarget": "space-adventure-ui:build:production"
             },
             "development": {
-              "browserTarget": "space-adventure-ui:build:development"
+              "buildTarget": "space-adventure-ui:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -84,7 +84,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "space-adventure-ui:build"
+            "buildTarget": "space-adventure-ui:build"
           }
         },
         "test": {
