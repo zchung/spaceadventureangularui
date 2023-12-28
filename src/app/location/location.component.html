@@ -13,7 +13,8 @@
 <span>Progress:</span>
 <p><ngb-progressbar type="success" [value]="location.currentPosition" [max]="location.locationSize"></ngb-progressbar></p>
 <div *ngIf="location.hostility">
-  <span class="text-danger">Hostilities:</span>
+  <span class="text-danger">Hostilities:</span><br />
+  <span class="text-danger">Aggression Level: {{location.hostility.aggressionName}}</span>
   <p><ngb-progressbar type="danger" [value]="location.hostility.currentHitpoints" [max]="location.hostility.maximumHitpoints"></ngb-progressbar></p>
 </div>
 <div *ngIf="location.mining">
