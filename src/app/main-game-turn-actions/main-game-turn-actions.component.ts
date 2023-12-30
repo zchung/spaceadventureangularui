@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { MatLegacyRadioChange as MatRadioChange } from '@angular/material/legacy-radio';
 import { TradeAction } from '../models/enums/trade-action';
 import { TurnAction } from '../models/enums/turn-action';
 import { EquipmentSelected } from '../models/requests/equipment-selected';
 import { ShipEquipmentList } from '../models/ship-equipment-list-model';
+import { MatRadioChange } from '@angular/material/radio';
 
 @Component({
   selector: 'app-main-game-turn-actions',
